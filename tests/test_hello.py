@@ -1,12 +1,14 @@
+import pytest
 from app import app
 
-def test_root_status_code():
+@pytest.fixture
+def resp():
+  client = app.test_client()
+  response = client.get('/')
+  return response
+def test_root_status_code(resp):
   """Testing status code from root"""
-  client = app.test_client()
-  response = client.get('/')
-  assert response.status_code == 200
+  assert resp.status_code == 200
 
-def test_root_message():
-  client = app.test_client()
-  response = client.get('/')
-  assert "Hello World" in response.get_data(as_text=True)
+def test_root_message(resp):
+  assert "Hello World" in resp.get_data(as_text=True)
