@@ -4,7 +4,7 @@ from flask import url_for
 
 @pytest.fixture
 def resp(client):
-    response = client.get(url_for('hello'))
+    response = client.get(url_for('names.hello'))
     return response
 
 

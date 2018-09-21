@@ -1,5 +1,7 @@
 from flask import Flask
 
+from blueprints.names.bp import bp as names_bp
+
 app = Flask(__name__)
 
-from rotas import hello, query_string  # noqa
+app.register_blueprint(names_bp, url_prefix='/')
