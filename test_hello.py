@@ -1,13 +1,22 @@
+import pytest
+from flask import url_for
+
 from app import app
 
 
-def test_hello_status_code():
+@pytest.fixture()
+def resp():
+    print('Executando fixture')
     client = app.test_client()
-    response = client.get('/')
-    assert response.status_code == 200
+    context = app.test_request_context()
+    context.push()
+    response = client.get(url_for('hello'))
+    return response
 
 
-def test_hello_msg():
-    client = app.test_client()
-    response = client.get('/')
-    assert 'Olá Mundo' in response.get_data(as_text=True)
+def test_hello_status_code(resp):
+    assert resp.status_code == 200
+
+
+def test_hello_msg(resp):
+    assert 'Olá Mundo' in resp.get_data(as_text=True)
