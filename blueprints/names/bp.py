@@ -3,9 +3,12 @@ from flask import Blueprint, request
 bp = Blueprint('names', __name__)
 
 
-@bp.route('/name_lastname')
+@bp.route('/name_lastname', methods=['GET', 'POST'])
 def name_lastname():
-    name, lastname = request.args['name'], request.args['lastname']
+    dct = request.args
+    if request.method == 'POST':
+        dct = request.form
+    name, lastname = dct['name'], dct['lastname']
     return f'{name} {lastname}'
 
 
