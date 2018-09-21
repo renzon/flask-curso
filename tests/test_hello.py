@@ -1,14 +1,9 @@
 import pytest
 from flask import url_for
 
-from app import app
 
-
-@pytest.fixture()
-def resp():
-    client = app.test_client()
-    context = app.test_request_context()
-    context.push()
+@pytest.fixture
+def resp(client):
     response = client.get(url_for('hello'))
     return response
 
