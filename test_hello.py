@@ -1,17 +1,18 @@
-import pytest
-from app import app
+from flask import url_for
 
-def test_hello_string():
-    #assert 1 == 1
-
+@pytest.fixture()
+def resp():
+    print('Executando fixture')
     client = app.test_client()
-    response = client.get('/')
-    assert "Olá Mundo" in response.get_data(as_text=True)
+    context = app.test_request_context()
+    context.push()
+    response = client.get(url_for('hello'))
+    return response
 
-def test_hello_200():
-    #assert 1 == 1
 
-    client = app.test_client()
-    response = client.get('/')
-    assert response.status_code == 200
+def test_hello_status_code(resp):
+    assert resp.status_code == 200
 
+
+def test_hello_msg(resp):
+    assert 'Olá Mundo' in resp.get_data(as_text=True)
