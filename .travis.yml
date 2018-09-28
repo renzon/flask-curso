@@ -7,10 +7,12 @@ addons:
   postgresql: '9.5'
 install:
   - pip install -q -r requirements-dev.txt
+
 before_script:
   - psql -c "CREATE DATABASE testdb;" -U postgres
-  - flask db upgrade
-script:
-  - flake8 .
   - cp contrib/env-sample .env
+  - flask db upgrade
+
+script:
+- flake8 .
   - pytest .
