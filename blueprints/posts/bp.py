@@ -15,3 +15,4 @@ def new():
     post = Post(title='Meu Post', content='Meu conteúdo')
     db.session.add(post)
     db.session.commit()
+    return repr(post)

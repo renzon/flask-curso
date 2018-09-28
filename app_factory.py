@@ -3,7 +3,7 @@ from flask import Flask
 import settings
 from blueprints.names.bp import bp as names_bp
 from blueprints.posts.bp import init_app as posts_init_app
-from ext.db import db
+from ext import db
 
 
 def create_app(default_settings=None):
