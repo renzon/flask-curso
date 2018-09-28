@@ -12,3 +12,5 @@ Mako==1.0.7
 alembic==1.0.0
 python-dateutil==2.7.3
 python-editor==1.0.3
+Blinker==1.4
+flask-debugtoolbar==0.10.1
