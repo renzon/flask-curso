@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, redirect, render_template, request, url_for
 
 from blueprints.posts.models import Post
 from ext.db import db
@@ -18,7 +18,7 @@ def new():
     post = Post(title=form['title'], content=form['content'])
     db.session.add(post)
     db.session.commit()
-    return repr(post)
+    return redirect(url_for('posts.list_posts'))
 
 
 @bp.route('/', )
