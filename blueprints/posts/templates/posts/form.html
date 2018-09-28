@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form de Post</title>
+</head>
+<body>
+<form action="{{ url_for('posts.new') }}" method="post">
+    Título: <input type="text" name="title"/>
+    <br/>
+    Conteúdo: <textarea name="content"></textarea>
+    <br/>
+    <button type="submit">Salvar</button>
+</form>
+</body>
+</html>
